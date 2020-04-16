@@ -1,0 +1,50 @@
+﻿<Window x:Class="TextEditorExample.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="400" Width="625">
+    <Window.Resources></Window.Resources>
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Open" Executed="Open_Executed" />
+        <CommandBinding Command="ApplicationCommands.Save" Executed="Save_Executed" />
+    </Window.CommandBindings>
+    <DockPanel>
+        <ToolBar DockPanel.Dock="Top" Background="#FFEEEEEE">
+            <Button Command="ApplicationCommands.Open">
+                <Image Source="/Images/folder.png" Width="16" Height="16" />
+            </Button>
+            <Button Command="ApplicationCommands.Save">
+                <Image Source="/Images/disk.png" Width="16" Height="16" />
+            </Button>
+            <Separator />
+            <ToggleButton Command="EditingCommands.ToggleBold" Name="btnBold">
+                <Image Source="/Images/text_bold.png" Width="16" Height="16" />
+            </ToggleButton>
+            <ToggleButton Command="EditingCommands.ToggleItalic" Name="btnItalic">
+                <Image Source="/Images/text_italic.png" Width="16" Height="16" />
+            </ToggleButton>
+            <ToggleButton Command="EditingCommands.ToggleUnderline" Name="btnUnderline">
+                <Image Source="/Images/text_underline.png" Width="16" Height="16" />
+            </ToggleButton>
+            <Separator />
+            <ComboBox Name="cmbFontFamily" Width="150" SelectionChanged="cmbFontFamily_SelectionChanged" />
+            <ComboBox Name="cmbFontSize" Width="50" IsEditable="True" TextBoxBase.TextChanged="cmbFontSize_TextChanged" />
+            <ComboBox Name="cmbColors" Width="80" IsEditable="True" TextBoxBase.TextChanged="cmbColors_TextChanged" >
+                <ComboBox.Resources>
+                    <Style TargetType="ComboBoxItem">
+                        <Setter Property="Foreground" Value="{Binding}"></Setter>
+                    </Style>
+                </ComboBox.Resources>
+            </ComboBox>
+            <ComboBox Name="cmbBgColors" Width="80" IsEditable="True" TextBoxBase.TextChanged="cmbBgColors_TextChanged" >
+                <ComboBox.Resources>
+                    <Style TargetType="ComboBoxItem">
+                        <Setter Property="Background" Value="{Binding}"></Setter>
+                        <Setter Property="Content" Value=""></Setter>
+                    </Style>
+                </ComboBox.Resources>
+            </ComboBox>
+        </ToolBar>
+        <RichTextBox Name="rtbEditor" SelectionChanged="rtbEditor_SelectionChanged" />
+    </DockPanel>
+
+</Window>
